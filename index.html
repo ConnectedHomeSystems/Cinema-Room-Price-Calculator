@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cinema Room Cost Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f9;
+      padding: 40px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 { text-align: center; margin-bottom: 20px; }
+    .calculator {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label { display: block; margin-top: 15px; }
+    select, input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover { background: #0056b3; }
+    .result {
+      margin-top: 25px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Cinema Room Cost Calculator</h1>
+
+  <div class="calculator">
+    <label for="roomSize">Room Size:</label>
+    <select id="roomSize" onchange="updateRowsOptions()">
+      <option value="8000">Size 1 (Single Garage)</option>
+      <option value="12000">Size 2 (Double Garage)</option>
+      <option value="18000">Size 3 (Larger)</option>
+    </select>
+
+    <label for="fabricWalls">Number of Fabric Walls:</label>
+    <select id="fabricWalls">
+      <option value="1">1</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+
+    <label for="lighting">Atmospheric Lighting?</label>
+    <select id="lighting">
+      <option value="0">No</option>
+      <option value="2000">Yes</option>
+    </select>
+
+    <label for="starCeiling">Star Ceiling?</label>
+    <select id="starCeiling">
+      <option value="0">No</option>
+      <option value="3000">Yes</option>
+    </select>
+
+    <label for="rows">Number of Rows of Seats:</label>
+    <select id="rows">
+      <option value="2000">1</option>
+      <option value="3500">2</option>
+      <option value="5000">3</option>
+    </select>
+
+    <button onclick="calculateTotal()">Calculate Estimate</button>
+
+    <div class="result" id="result">Estimated Total: £0</div>
+  </div>
+
+  <script>
+    function updateRowsOptions() {
+      const roomSize = document.getElementById('roomSize').options[document.getElementById('roomSize').selectedIndex].text;
+      const rowsSelect = document.getElementById('rows');
+
+      // Reset options
+      rowsSelect.innerHTML = '';
+
+      if (roomSize.includes('Size 1')) {
+        rowsSelect.innerHTML += '<option value="2000">1</option>';
+      } else if (roomSize.includes('Size 2')) {
+        rowsSelect.innerHTML += '<option value="2000">1</option>';
+        rowsSelect.innerHTML += '<option value="3500">2</option>';
+      } else {
+        rowsSelect.innerHTML += '<option value="2000">1</option>';
+        rowsSelect.innerHTML += '<option value="3500">2</option>';
+        rowsSelect.innerHTML += '<option value="5000">3</option>';
+      }
+    }
+
+    function calculateTotal() {
+      const room = parseInt(document.getElementById('roomSize').value);
+      const fabricWalls = parseInt(document.getElementById('fabricWalls').value);
+      const lighting = parseInt(document.getElementById('lighting').value);
+      const starCeiling = parseInt(document.getElementById('starCeiling').value);
+      const rows = parseInt(document.getElementById('rows').value);
+
+      const fabricCost = fabricWalls * 1000; // £1000 per wall
+      const total = room + fabricCost + lighting + starCeiling + rows;
+
+      document.getElementById('result').innerText = `Estimated Total: £${total.toLocaleString()}`;
+    }
+
+    // Run once on page load
+    updateRowsOptions();
+  </script>
+
+</body>
+</html>
