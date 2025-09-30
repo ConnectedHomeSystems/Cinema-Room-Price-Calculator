@@ -50,6 +50,25 @@
       font-size: 20px;
       font-weight: bold;
     }
+
+  .info-box {
+    background: rgba(255, 255, 255, 0.9); /* light box with transparency */
+    color: #000; /* black text */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-top: 30px; /* space above box */
+  }
+
+  .info-box h2 {
+    margin-top: 0;
+    text-align: center;
+  }
+
+  .info-box p {
+    line-height: 1.6;
+  }
+    
   </style>
 </head>
 <body>
@@ -95,6 +114,16 @@
     <div class="result" id="result">Estimated Total: £0</div>
   </div>
 
+    <div class="info-box">
+    <h2>About Our Cinema Rooms</h2>
+    <p>
+     All figures are approximate, contact us online for a customised quote.
+    </p>
+    <p>
+      njervbnejkvndjkmskldmsklv
+    </p>
+  </div>
+  
   <script>
     function updateRowsOptions() {
       const roomSize = document.getElementById('roomSize').options[document.getElementById('roomSize').selectedIndex].text;
