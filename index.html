@@ -188,9 +188,12 @@
 
       const selectedText = performanceSelect.options[performanceSelect.selectedIndex].text;
       const selectedCost = parseInt(performanceSelect.value);
-      
-      result.innerText = `Estimate for ${selectedText}: From £${selectedCost.toLocaleString()}`;
+
+      const cleanedText = selectedText.replace(/^Level \d+: /, '');
+
+      result.innerText = `Your estimate for ${cleanedText}is from £${selectedCost.toLocaleString()}`;
     }
+
   </script>
 
 </body>
