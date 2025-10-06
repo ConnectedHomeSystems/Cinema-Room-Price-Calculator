@@ -127,21 +127,21 @@
     // Define performance options for each room size
     const performanceOptions = {
       small: [
-        { name: "Entry-level cinema gaming room", cost: 8000 },
-        { name: "Premium small theater", cost: 12000 },
-        { name: "Reference-grade compact room", cost: 18000 }
+        { name: "Level 1: Entry-level cinema gaming room", cost: 25000 },
+        { name: "Level 2: Premium small theater", cost: 40000 },
+        { name: "Level 3: Reference-grade compact room", cost: 60000 }
       ],
       medium: [
-        { name: "Home theater + casual listening", cost: 10000 },
-        { name: "Enthusiast theater", cost: 15000 },
-        { name: "Audiophile-grade performance", cost: 20000 },
-        { name: "Mixing rooms / reference home cinemas", cost: 25000 }
+        { name: "Level 1: Home theater + casual listening", cost: 40000 },
+        { name: "Level 2: Enthusiast theater", cost: 70000 },
+        { name: "Level 3: Audiophile-grade performance", cost: 120000 },
+        { name: "Level 4: Mixing rooms / reference home cinemas", cost: 100000 }
       ],
       large: [
-        { name: "Multi-purpose media room", cost: 12000 },
-        { name: "High-performance home cinema", cost: 18000 },
-        { name: "Dedicated screening room", cost: 25000 },
-        { name: "Commercial reference suite", cost: 35000 }
+        { name: "Level 1: Multi-purpose media room", cost: 70000 },
+        { name: "Level 2: High-performance home cinema", cost: 120000 },
+        { name: "Level 3: Dedicated screening room", cost: 250000 },
+        { name: "Level 4: Commercial reference suite", cost: 200000 }
       ]
     };
 
@@ -189,7 +189,7 @@
       const selectedText = performanceSelect.options[performanceSelect.selectedIndex].text;
       const selectedCost = parseInt(performanceSelect.value);
       
-      result.innerText = `Estimate for ${selectedText}: £${selectedCost.toLocaleString()}`;
+      result.innerText = `Estimate for ${selectedText}: From £${selectedCost.toLocaleString()}`;
     }
   </script>
 
