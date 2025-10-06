@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cinema Room Performance Calculator</title>
+  <title>Cinema Room Cost Estimator</title>
   <style>
     /* ===== BASIC PAGE STYLING ===== */
     body {
@@ -117,11 +117,11 @@
 
   <img src="cinema knights logo.png" alt="Cinema Knights Logo" class="page-logo">
 
-  <h1>Cinema Room Performance Estimator</h1>
+  <h1>Cinema Room Cost Estimator</h1>
 
   <div class="calculator">
     <!-- ROOM SIZE SELECTOR -->
-    <label for="roomSize">Select Room Size:</label>
+    <label for="roomSize">Select Room Size (Width x Length x Height):</label>
     <select id="roomSize" onchange="updatePerformanceOptions()">
       <option value="">-- Choose a Room Size --</option>
       <option value="small">Small (3x4x2.4m)</option>
@@ -148,6 +148,8 @@
     <h2>About Our Cinema Rooms</h2>
     <p>
       All figures are approximate as every experience we create is tailored to you. <br>
+    </p>
+    <p>
       Like what you see? Get in touch to start your cinematic experience!
     </p>
   </div>
@@ -160,8 +162,8 @@
     </p>
     <p>
       🔗 <a href="http://cinemaknights.co.uk/" target="_blank">Visit Our Website</a><br>
-      📧 <a href="">Blank</a><br>
-      📞 <a href="tel:+">Blank</a>
+      📧 <a href="mailto:info@cinemaknights.co.uk">info@cinemaknights.co.uk</a><br>
+      📞 <a href="tel:01527 390398">01527 390398</a>
     </p>
   </div>
 
@@ -169,21 +171,21 @@
     // Define performance options for each room size
     const performanceOptions = {
       small: [
-        { name: "Level 1: Entry-level cinema gaming room", cost: 25000 },
-        { name: "Level 2: Premium small theater", cost: 40000 },
-        { name: "Level 3: Reference-grade compact room", cost: 60000 }
+        { name: "Level 1: An entry-level cinema/gaming room", cost: 25000 },
+        { name: "Level 2: A premium small theater", cost: 40000 },
+        { name: "Level 3: A reference-grade compact room", cost: 60000 }
       ],
       medium: [
-        { name: "Level 1: Home theater + casual listening", cost: 40000 },
-        { name: "Level 2: Enthusiast theater", cost: 70000 },
-        { name: "Level 3: Audiophile-grade performance", cost: 120000 },
+        { name: "Level 1: A home theater + casual listening", cost: 40000 },
+        { name: "Level 2: An enthusiast theater", cost: 70000 },
+        { name: "Level 3: An audiophile-grade performance", cost: 120000 },
         { name: "Level 4: Mixing rooms / reference home cinemas", cost: 100000 }
       ],
       large: [
-        { name: "Level 1: Multi-purpose media room", cost: 70000 },
-        { name: "Level 2: High-performance home cinema", cost: 120000 },
-        { name: "Level 3: Dedicated screening room", cost: 250000 },
-        { name: "Level 4: Commercial reference suite", cost: 200000 }
+        { name: "Level 1: A multi-purpose media room", cost: 70000 },
+        { name: "Level 2: A high-performance home cinema", cost: 120000 },
+        { name: "Level 3: A dedicated screening room", cost: 250000 },
+        { name: "Level 4: A commercial reference suite", cost: 200000 }
       ]
     };
 
@@ -233,7 +235,7 @@
 
       const cleanedText = selectedText.replace(/^Level \d+: /, '');
 
-      result.innerText = `Your estimate cost for the ${cleanedText} would be from £${selectedCost.toLocaleString()}`;
+      result.innerText = `Your estimate cost for ${cleanedText} would be from £${selectedCost.toLocaleString()}`;
     }
 
   </script>
