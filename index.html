@@ -3,37 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cinema Room Price Calculator</title>
+  <title>Cinema Room Performance Calculator</title>
   <style>
+    /* ===== BASIC PAGE STYLING ===== */
     body {
-    font-family: 'Segoe UI', sans-serif;
-    background-image: url('cinemaroombackground.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    color: #000;
-    padding: 10px;
-    max-width: 600px;
-    margin: auto;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('cinemaroombackground.png');
+      background-size: cover; /* keeps proportions */
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      color: #000;
+      padding: 40px;
+      max-width: 600px;
+      margin: auto;
     }
-    h1 { text-align: center; margin-bottom: 20px; color: #fff; }
+
+    /* Title */
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+
+    /* Calculator box */
     .calculator {
-      background: white;
+      background: rgba(255, 255, 255, 0.95);
       padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    label { display: block; margin-top: 8px; }
-    select, input {
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    select {
       width: 100%;
-      padding: 8px;
-      margin-top: 5px;
+      padding: 10px;
+      margin-top: 8px;
       border: 1px solid #ccc;
       border-radius: 6px;
+      font-size: 16px;
     }
+
     button {
-      margin-top: 20px;
+      margin-top: 25px;
       width: 100%;
       padding: 12px;
       background: #007bff;
@@ -43,7 +61,11 @@
       font-size: 16px;
       cursor: pointer;
     }
-    button:hover { background: #0056b3; }
+
+    button:hover {
+      background: #0056b3;
+    }
+
     .result {
       margin-top: 25px;
       text-align: center;
@@ -51,108 +73,124 @@
       font-weight: bold;
     }
 
-  .info-box {
-    background: rgba(255, 255, 255, 0.9);
-    color: #000;
-    border-radius: 12px;
-    padding: 2px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    margin-top: 30px;
-    text-align: center;
-  }
+    .info-box {
+      background: rgba(255, 255, 255, 0.9);
+      color: #000;
+      border-radius: 12px;
+      padding: 2px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-top: 30px;
+      text-align: center;
+    }
     
   </style>
 </head>
 <body>
 
-  <h1>Cinema Room Price Calculator</h1>
+  <h1>Cinema Room Performance Estimator</h1>
 
   <div class="calculator">
-    <label for="roomSize">Room Size:</label>
-    <select id="roomSize" onchange="updateRowsOptions()">
-      <option value="8000">Size 1 - 2.5m x 5m (Approximately the size of a single garage)</option>
-      <option value="12000">Size 2 - 5m x 6m (Approximately the size of a double garage)</option>
-        <option value="18000">Size 3 (W.I.P. add info later)</option>
+    <!-- ROOM SIZE SELECTOR -->
+    <label for="roomSize">Select Room Size:</label>
+    <select id="roomSize" onchange="updatePerformanceOptions()">
+      <option value="">-- Choose a Room Size --</option>
+      <option value="small">Small (3x4x2.4m)</option>
+      <option value="medium">Medium (4x6x2.7m)</option>
+      <option value="large">Large (6x8x3m)</option>
     </select>
 
-    <label for="fabricWalls">Number of Fabric Walls:</label>
-    <select id="fabricWalls">
-      <option value="1">1</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select>
+    <!-- PERFORMANCE LEVEL (POPULATES BASED ON ROOM SIZE) -->
+    <div id="performanceContainer" style="display:none;">
+      <label for="performanceLevel">Select Performance Level:</label>
+      <select id="performanceLevel">
+        <!-- options added dynamically -->
+      </select>
+    </div>
 
-    <label for="lighting">Atmospheric Lighting?</label>
-    <select id="lighting">
-      <option value="0">No</option>
-      <option value="9">Yes</option>
-    </select>
+    <!-- BUTTON -->
+    <button onclick="showEstimate()">Show Estimate</button>
 
-    <label for="starCeiling">Star Ceiling?</label>
-    <select id="starCeiling">
-      <option value="0">No</option>
-      <option value="3000">Yes</option>
-    </select>
-
-    <label for="rows">Number of Rows of Seats: (Options adjust based on room size)</label>
-    <select id="rows">
-      <option value="2000">1</option>
-      <option value="3500">2</option>
-      <option value="5000">3</option>
-    </select>
-
-    <button onclick="calculateTotal()">Calculate Estimate</button>
-
-    <div class="result" id="result">Estimated Total: £0</div>
+    <!-- RESULT -->
+    <div class="result" id="result">Please select options above.</div>
   </div>
 
-    <div class="info-box">
+  <div class="info-box">
+    <h2>About Our Cinema Rooms</h2>
     <p>
-     All figures are approximate, contact us online for a customised quote.
-    </p>
-    <p>
-      You can get in touch with us via the following:<br>
-      Phone - 01527 390398<br>
-      Email - info@cinemaknights.co.uk<br>
-      Website - cinemaknights.co.uk
+      All figures are approximate as every experience we create is tailored to you. <br>
+      Like what you see? Get in touch to start your cinematic experience!
     </p>
   </div>
-  
+
+
   <script>
-    function updateRowsOptions() {
-      const roomSize = document.getElementById('roomSize').options[document.getElementById('roomSize').selectedIndex].text;
-      const rowsSelect = document.getElementById('rows');
+    // Define performance options for each room size
+    const performanceOptions = {
+      small: [
+        { name: "Entry-level cinema gaming room", cost: 8000 },
+        { name: "Premium small theater", cost: 12000 },
+        { name: "Reference-grade compact room", cost: 18000 }
+      ],
+      medium: [
+        { name: "Home theater + casual listening", cost: 10000 },
+        { name: "Enthusiast theater", cost: 15000 },
+        { name: "Audiophile-grade performance", cost: 20000 },
+        { name: "Mixing rooms / reference home cinemas", cost: 25000 }
+      ],
+      large: [
+        { name: "Multi-purpose media room", cost: 12000 },
+        { name: "High-performance home cinema", cost: 18000 },
+        { name: "Dedicated screening room", cost: 25000 },
+        { name: "Commercial reference suite", cost: 35000 }
+      ]
+    };
 
-      // Reset options
-      rowsSelect.innerHTML = '';
+    // Update performance dropdown when room size changes
+    function updatePerformanceOptions() {
+      const size = document.getElementById('roomSize').value;
+      const container = document.getElementById('performanceContainer');
+      const performanceSelect = document.getElementById('performanceLevel');
 
-      if (roomSize.includes('Size 1')) {
-        rowsSelect.innerHTML += '<option value="2000">1</option>';
-      } else if (roomSize.includes('Size 2')) {
-        rowsSelect.innerHTML += '<option value="2000">1</option>';
-        rowsSelect.innerHTML += '<option value="3500">2</option>';
-      } else {
-        rowsSelect.innerHTML += '<option value="2000">1</option>';
-        rowsSelect.innerHTML += '<option value="3500">2</option>';
-        rowsSelect.innerHTML += '<option value="5000">3</option>';
+      // Reset dropdown
+      performanceSelect.innerHTML = '';
+
+      if (!size) {
+        container.style.display = 'none';
+        document.getElementById('result').innerText = "Please select options above.";
+        return;
       }
+
+      // Populate new options
+      performanceOptions[size].forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option.cost;
+        opt.text = option.name;
+        performanceSelect.appendChild(opt);
+      });
+
+      container.style.display = 'block';
     }
 
-    function calculateTotal() {
-      const room = parseInt(document.getElementById('roomSize').value);
-      const fabricWalls = parseInt(document.getElementById('fabricWalls').value);
-      const lighting = parseInt(document.getElementById('lighting').value);
-      const starCeiling = parseInt(document.getElementById('starCeiling').value);
-      const rows = parseInt(document.getElementById('rows').value);
+    // Display estimated cost
+    function showEstimate() {
+      const size = document.getElementById('roomSize').value;
+      const performanceSelect = document.getElementById('performanceLevel');
+      const result = document.getElementById('result');
 
-      const fabricCost = fabricWalls * 1000; // £1000 per wall
-      const total = room + fabricCost + lighting + starCeiling + rows;
+      if (!size) {
+        result.innerText = "Please select a room size.";
+        return;
+      }
+      if (!performanceSelect.value) {
+        result.innerText = "Please select a performance level.";
+        return;
+      }
 
-      document.getElementById('result').innerText = `Estimated Total: £${total.toLocaleString()}`;
+      const selectedText = performanceSelect.options[performanceSelect.selectedIndex].text;
+      const selectedCost = parseInt(performanceSelect.value);
+      
+      result.innerText = `Estimate for ${selectedText}: £${selectedCost.toLocaleString()}`;
     }
-
-    // Run once on page load
-    updateRowsOptions();
   </script>
 
 </body>
