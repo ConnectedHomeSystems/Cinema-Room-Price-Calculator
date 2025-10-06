@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -25,6 +25,13 @@
       margin-bottom: 20px;
       color: #fff;
       text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+
+    .page-logo {
+      display: block;
+      margin: 0 auto 20px;
+      width: 120px;
+      height: auto;
     }
 
     /* Calculator box */
@@ -82,10 +89,34 @@
       margin-top: 30px;
       text-align: center;
     }
+
+    .contact-box {
+      background: rgba(255, 255, 255, 0.9);
+      color: #000;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-top: 30px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+.contact-box a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-box a:hover {
+  text-decoration: underline;
+}
+
     
   </style>
 </head>
 <body>
+
+  <img src="cinemaknights_logo.png" alt="Cinema Knights Logo" class="page-logo">
 
   <h1>Cinema Room Performance Estimator</h1>
 
@@ -122,6 +153,18 @@
     </p>
   </div>
 
+  <div class="contact-box">
+    <h2>Contact Us</h2>
+    <p>
+      Have questions or want to start your cinema project?<br>
+      Reach out to us via the links below:
+    </p>
+    <p>
+      🔗 <a href="https://yourwebsite.com" target="_blank">Blank</a><br>
+      📧 <a href="mailto:info@yourwebsite.com">Blank</a><br>
+      📞 <a href="tel:+441234567890">Blank</a>
+    </p>
+  </div>
 
   <script>
     // Define performance options for each room size
